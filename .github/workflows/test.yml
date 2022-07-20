@@ -1,7 +1,19 @@
 name: GitHub Actions TEST
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      deploy-target:
+        description: 'des ??'
+        required: true
+        default:  'default-test'
+        type: choice
+        options:
+          - test1
+          - test2
+
 jobs:
-  Explore-GitHub-Actions:
+  test1:
+    name: deploy test1
     runs-on: ubuntu-latest
     steps:
       - run: echo " github.event_name -  ${{ github.event_name }}"
@@ -16,3 +28,9 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  test2:
+    name: deploy test2
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "test2"
+
