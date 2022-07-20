@@ -1,12 +1,6 @@
 name: GitHub Actions TEST2
 
-on:
-  workflow_dispatch:
-    inputs:
-      deploy-target:
-        description: 'des ??'
-        required: true
-        default:  'test1'
+on: [push]
 env:
   NODE_VERSION: 16.x
   DEPLOY_TARGET: ${{ github.event.inputs.deploy-target }}
