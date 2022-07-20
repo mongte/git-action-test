@@ -15,8 +15,10 @@ env:
   DEPLOY_TARGET: ${{ github.event.inputs.deploy-target }}
   DEPLOY_BRANCH: ${{ github.ref_name }}
   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
 jobs:
   test1:
+    if: ${{ github.event.inputs.deploy-target == 'test1'}}
     name: deploy test1
     runs-on: ubuntu-latest
     steps:
@@ -35,6 +37,7 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
   test2:
+    if: ${{ github.event.inputs.deploy-target == 'test2'}}
     name: deploy test2
     runs-on: ubuntu-latest
     steps:
