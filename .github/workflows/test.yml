@@ -1,0 +1,18 @@
+name: GitHub Actions TEST
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo " github.event_name -  ${{ github.event_name }}"
+      - run: echo " runner.os - ${{ runner.os }}"
+      - run: echo " github.ref - ${{ github.ref }}"
+      - run: echo " github.repository - ${{ github.repository }}"
+      - run: echo " github.ref_name - ${{ github.ref_name }}"
+      - run: echo " github.event.inputs.deploy-target - ${{ github.event.inputs.deploy-target }}"
+      - name: Check out repository code - actions/checkout@v3
+        uses: actions/checkout@v3
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
