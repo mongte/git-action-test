@@ -1,4 +1,5 @@
 name: GitHub Actions TEST2
+
 on:
   workflow_dispatch:
     inputs:
@@ -25,7 +26,7 @@ jobs:
       - name: Check out repository code - actions/checkout@v3
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 #모든 태그 및 분기에 대한 모든 기록
+          fetch-depth: 0
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
