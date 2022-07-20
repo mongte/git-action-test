@@ -5,12 +5,16 @@ on:
       deploy-target:
         description: 'des ??'
         required: true
-        default:  'default-test'
+        default:  'test1'
         type: choice
         options:
           - test1
           - test2
-
+env:
+  NODE_VERSION: 16.x
+  DEPLOY_TARGET: ${{ github.event.inputs.deploy-target }}
+  DEPLOY_BRANCH: ${{ github.ref_name }}
+  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 jobs:
   test1:
     name: deploy test1
@@ -24,6 +28,8 @@ jobs:
       - run: echo " github.event.inputs.deploy-target - ${{ github.event.inputs.deploy-target }}"
       - name: Check out repository code - actions/checkout@v3
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 #모든 태그 및 분기에 대한 모든 기록
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
