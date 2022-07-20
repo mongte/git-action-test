@@ -6,6 +6,7 @@ on:
       deploy-target:
         description: 'select'
         required: true
+        default: 'test1'
 env:
   NODE_VERSION: 16.x
   DEPLOY_TARGET: ${{ github.event.inputs.deploy-target }}
@@ -22,12 +23,5 @@ jobs:
       - run: echo " github.repository - ${{ github.repository }}"
       - run: echo " github.ref_name - ${{ github.ref_name }}"
       - run: echo " github.event.inputs.deploy-target - ${{ github.event.inputs.deploy-target }}"
-      - name: Check out repository code - actions/checkout@v3
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+
 
