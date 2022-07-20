@@ -1,6 +1,16 @@
-name: GitHub Actions TEST2
+name: Test
 
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      deploy-target:
+        description: 'select'
+        required: true
+        default: 'test1'
+        type: choice
+        options:
+          - test1
+          - test2
 env:
   NODE_VERSION: 16.x
   DEPLOY_TARGET: ${{ github.event.inputs.deploy-target }}
@@ -8,6 +18,7 @@ env:
 
 jobs:
   test1:
+    if: ${{ github.event.inputs.deploy-target == 'test1' }}
     name: deploy test1
     runs-on: ubuntu-latest
     steps:
@@ -25,4 +36,11 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  test2:
+    if: ${{ github.event.inputs.deploy-target == 'test2' }}
+    name: deploy test2
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo " test2"
+      - run: echo " gg "
 
